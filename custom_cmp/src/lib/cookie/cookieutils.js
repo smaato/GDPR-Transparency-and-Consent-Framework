@@ -151,7 +151,6 @@ function decodeField({ input, output, startPosition, field }) {
 }
 
 function decodeFields({ input, fields, startPosition = 0 }) {
-	console.log(2, 'decodeFields')
 	let position = startPosition;
 	const decodedObject = fields.reduce((acc, field) => {
 		const { name, numBits } = field;
@@ -265,7 +264,6 @@ function decodeCookieBitValue(bitString, definitionMap) {
 	}
 	const cookieFields = definitionMap[cookieVersion].fields;
 	const { decodedObject } = decodeFields({ input: bitString, fields: cookieFields });
-	console.log(1, 'test', decodedObject);
 	return decodedObject;
 }
 
