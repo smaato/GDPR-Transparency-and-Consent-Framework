@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "origin": "http://ib.adnxs.com/vendors.json",
+  "purposes": [
+	{
+	  "id": 1,
+	  "name": "Accessing a Device or Browser"
+	},
+	{
+	  "id": 2,
+	  "name": "Advertising Personalisation"
+	},
+	{
+	  "id": 3,
+	  "name": "Analytics"
+	},
+	{
+	  "id": 4,
+	  "name": "Content Personalisation"
+	}
+  ],
+  "vendors": [
+	{
+	  "id": 1,
+	  "name": "Opt 1"
+	},
+	{
+	  "id": 2,
+	  "name": "Opt 2"
+	},
+	{
+	  "id": 3,
+	  "name": "Opt 3"
+	},
+	{
+	  "id": 4,
+	  "name": "Opt 4"
+	},
+	{
+	  "id": 5,
+	  "name": "Opt 5"
+	},
+	{
+	  "id": 6,
+	  "name": "Opt 6"
+	}
+  ]
+}
