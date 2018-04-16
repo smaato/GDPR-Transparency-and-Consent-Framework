@@ -1,5 +1,16 @@
 ![iab tech lab](https://user-images.githubusercontent.com/19175352/38649177-0d37d17c-3daa-11e8-8934-f0fb47919716.png)
 
+<aside class="warning">
+The current implementation is incomplete, it does not follow the official documentation.
+The following fields are missing:
+- CpmVersion (6 bits)
+- ConsentScreen (6 bits)
+- ConsentLanguage (12 bits)
+
+- The solution provided will not work on Android versions below v4.4
+- The solution provided has an issue when a user open twice the app (returns "undefined")
+</aside>
+
 
 # GDPR Transparency and Consent Framework
 Hosted in this repository are the technical specifications for IAB Europe Transparency and Consent Framework that will help the digital advertising industry interpret and comply with EU rules on data protection and privacy - notably the General Data Protection Regulation (GDPR) that comes into effect on May 25, 2018. 
