@@ -3,7 +3,7 @@
 
 * Configure the consent tool by providing a set of properties encapsulated in the `CMPSettings` object. Where:
 
-	* `GDPRStatus`: Enum that indicates
+	* `SubjectToGdpr`: Enum that indicates
 		* `CMPGDPRDisabled` - value 0, not subject to GDPR
 		* `CMPGDPREnabled` - value 1, subject to GDPR
 		* `CMPGDPRUnknown` - value 2, unset
