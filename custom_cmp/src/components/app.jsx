@@ -17,6 +17,7 @@ export default class App extends Component {
 			command: 'readVendorConsent',
 		}).then(result => {
 			window.location = `consent://${result ? result : ''}`;
+			console.log(1, result);
 		}).catch(err => {
 			log.error('Failed reading global vendor consent cookie', err);
 		});
