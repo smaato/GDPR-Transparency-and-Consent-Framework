@@ -2,7 +2,7 @@ import { h, render } from 'preact';
 import Promise from 'promise-polyfill';
 import Store from './store';
 import Cmp, { CMP_GLOBAL_NAME } from './cmp';
-import { readVendorConsentCookie, readPublisherConsentCookie, writeGlobalVendorConsentCookie } from './cookie/cookie';
+import { readVendorConsentCookie, readPublisherConsentCookie, writeGlobalVendorConsentCookie, decodeVendorConsentData } from './cookie/cookie';
 import { fetchVendorList, fetchPurposeList } from './vendor';
 import log from './log';
 import pack from '../../package.json';
@@ -23,13 +23,14 @@ export function init(configUpdates) {
 	log.debug('Using configuration:', config);
 
 	const base64 = getParameterByName('code64');
-	if (base64) {
-		writeGlobalVendorConsentCookie(base64, true);
-	}
 
 	// Fetch the current vendor consent before initializing
 	return readVendorConsentCookie()
 		.then(vendorConsentData => {
+			if (base64) {
+				// writeGlobalVendorConsentCookie(base64, true);
+				vendorConsentData = decodeVendorConsentData(base64)
+			}
 
 			// Initialize the store with all of our consent data
 			const store = new Store({vendorConsentData, publisherConsentData: readPublisherConsentCookie()});
