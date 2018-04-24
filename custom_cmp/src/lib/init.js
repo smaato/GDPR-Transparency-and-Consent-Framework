@@ -43,24 +43,6 @@ export function init(configUpdates) {
 			// Expose `processCommand` as the CMP implementation
 			window[CMP_GLOBAL_NAME] = cmp.processCommand;
 
-			// Execute any previously queued command
-			commandQueue.forEach(({callId, command, parameter, callback, event}) => {
-				// If command is queued with an event we will relay its result via postMessage
-				if (event) {
-					cmp.processCommand(command, parameter, result =>
-						event.source.postMessage({
-							[CMP_GLOBAL_NAME]: {
-								callId,
-								command,
-								result
-							}
-						}, event.origin));
-				}
-				else {
-					cmp.processCommand(command, parameter, callback);
-				}
-			});
-
 			// Render the UI
 			const App = require('../components/app').default;
 			render(<App store={store} notify={cmp.notify} />, document.body);
@@ -69,6 +51,10 @@ export function init(configUpdates) {
 			log.debug(`Successfully loaded CMP version: ${pack.version}`);
 			cmp.isLoaded = true;
 			cmp.notify('isLoaded');
+
+			// Execute any previously queued command
+			cmp.commandQueue = commandQueue;
+			cmp.processCommandQueue();
 
 			// Request lists
 			return Promise.all([
