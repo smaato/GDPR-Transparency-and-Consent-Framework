@@ -100,6 +100,9 @@ function decodeVendorConsentData(cookieValue) {
 	const {
 		cookieVersion,
 		cmpId,
+		cmpVersion,
+		consentScreen,
+		consentLanguage,
 		vendorListVersion,
 		purposeIdBitString,
 		maxVendorId,
@@ -114,6 +117,9 @@ function decodeVendorConsentData(cookieValue) {
 	const cookieData = {
 		cookieVersion,
 		cmpId,
+		cmpVersion,
+		consentScreen,
+		consentLanguage,
 		vendorListVersion,
 		selectedPurposeIds: decodeBitsToIds(purposeIdBitString),
 		maxVendorId,
@@ -203,14 +209,13 @@ function writeCookie(name, value, maxAgeSeconds, path = '/') {
 }
 
 function readPublisherConsentCookie() {
-	// If not configured to store publisher data return an empty object
-	if (!config.storePublisherData) {
-		return {};
-	}
-	const cookie = readCookie(PUBLISHER_CONSENT_COOKIE_NAME);
-	log.debug('Read publisher consent data from local cookie', cookie);
-	if (cookie) {
-		return decodePublisherConsentData(cookie);
+	// If configured try to read publisher cookie
+	if (config.storePublisherData) {
+		const cookie = readCookie(PUBLISHER_CONSENT_COOKIE_NAME);
+		log.debug('Read publisher consent data from local cookie', cookie);
+		if (cookie) {
+			return decodePublisherConsentData(cookie);
+		}
 	}
 }
 
@@ -249,18 +254,17 @@ function readGlobalVendorConsentCookie() {
  *
  * @returns Promise resolved after cookie is written
  */
-function writeGlobalVendorConsentCookie(vendorConsentData) {
+function writeGlobalVendorConsentCookie(vendorConsentData, encoded) {
 	log.debug('Write consent data to global cookie', vendorConsentData);
 	return sendPortalCommand({
 		command: 'writeVendorConsent',
-		encodedValue: encodeVendorConsentData(vendorConsentData),
+		encodedValue: encoded ? vendorConsentData : encodeVendorConsentData(vendorConsentData),
 		vendorConsentData,
 		cmpVersion: pack.version
 	}).catch(err => {
 		log.error('Failed writing global vendor consent cookie', err);
 	});
 }
-
 /**
  * Read vendor consent data from first-party cookie on the
  * local domain.

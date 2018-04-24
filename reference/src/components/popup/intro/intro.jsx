@@ -35,7 +35,7 @@ export default class Intro extends Component {
 					<LocalLabel localizeKey='title'>Thanks for visiting</LocalLabel> {DOMAIN}
 				</div>
 				<div class={style.description}>
-					<LocalLabel localizeKey='description'>In order to run a successful website, we and certain third parties are setting cookies and accessing and storing information on your device for various purposes. Various third parties are also collecting data to show you personalized content and ads. Some third parties require your consent to collect data to serve you personalized content and ads.</LocalLabel>
+					<LocalLabel localizeKey='description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eget sem velit. In sit amet accumsan mi. Nunc sit amet volutpat felis. Proin fermentum diam elit, ut viverra lectus eleifend a. Nam sit amet sem elit. Etiam posuere tortor ac felis gravida ullamcorper. Aliquam laoreet, massa in egestas malesuada, diam nunc ultrices libero, eget suscipit leo nisl accumsan ligula. Nullam sagittis vehicula placerat. Ut id neque elit. Vestibulum ac pharetra mauris.</LocalLabel>
 				</div>
 				<div class={style.options}>
 					<Button
