@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9223A612207FC83D0035F7C1 /* CMPConsentToolAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 9223A60D207FC83D0035F7C1 /* CMPConsentToolAPI.m */; };
-		9223A613207FC83D0035F7C1 /* CMPConsentToolUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9223A60E207FC83D0035F7C1 /* CMPConsentToolUtil.m */; };
-		9223A614207FC83D0035F7C1 /* CMPConsentToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9223A60F207FC83D0035F7C1 /* CMPConsentToolViewController.m */; };
-		9223A615207FC83D0035F7C1 /* CMPActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9223A610207FC83D0035F7C1 /* CMPActivityIndicatorView.m */; };
+		92214CD120921F96009049DD /* CMPConsentParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CBF20921F96009049DD /* CMPConsentParser.m */; };
+		92214CD220921F96009049DD /* CMPDataStorageUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CC520921F96009049DD /* CMPDataStorageUserDefaults.m */; };
+		92214CD320921F96009049DD /* CMPConsentToolAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CC920921F96009049DD /* CMPConsentToolAPI.m */; };
+		92214CD420921F96009049DD /* CMPConsentToolUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CCA20921F96009049DD /* CMPConsentToolUtil.m */; };
+		92214CD520921F96009049DD /* CMPConsentToolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CCF20921F96009049DD /* CMPConsentToolViewController.m */; };
+		92214CD620921F96009049DD /* CMPActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92214CD020921F96009049DD /* CMPActivityIndicatorView.m */; };
 		D1B2F0712075FC4700EB06AE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B2F0702075FC4700EB06AE /* AppDelegate.m */; };
 		D1B2F0742075FC4700EB06AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B2F0732075FC4700EB06AE /* ViewController.m */; };
 		D1B2F0772075FC4700EB06AE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1B2F0752075FC4700EB06AE /* Main.storyboard */; };
@@ -33,15 +35,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9223A609207FC83D0035F7C1 /* CMPConsentToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolViewController.h; sourceTree = "<group>"; };
-		9223A60A207FC83D0035F7C1 /* CMPConsentToolUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolUtil.h; sourceTree = "<group>"; };
-		9223A60B207FC83D0035F7C1 /* CMPActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPActivityIndicatorView.h; sourceTree = "<group>"; };
-		9223A60C207FC83D0035F7C1 /* CMPTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPTypes.h; sourceTree = "<group>"; };
-		9223A60D207FC83D0035F7C1 /* CMPConsentToolAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolAPI.m; sourceTree = "<group>"; };
-		9223A60E207FC83D0035F7C1 /* CMPConsentToolUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolUtil.m; sourceTree = "<group>"; };
-		9223A60F207FC83D0035F7C1 /* CMPConsentToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolViewController.m; sourceTree = "<group>"; };
-		9223A610207FC83D0035F7C1 /* CMPActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPActivityIndicatorView.m; sourceTree = "<group>"; };
-		9223A611207FC83D0035F7C1 /* CMPConsentToolAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolAPI.h; sourceTree = "<group>"; };
+		92214CBF20921F96009049DD /* CMPConsentParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentParser.m; sourceTree = "<group>"; };
+		92214CC020921F96009049DD /* CMPConsentConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentConstant.h; sourceTree = "<group>"; };
+		92214CC120921F96009049DD /* CMPConsentParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentParser.h; sourceTree = "<group>"; };
+		92214CC320921F96009049DD /* CMPDataStorageUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPDataStorageUserDefaults.h; sourceTree = "<group>"; };
+		92214CC420921F96009049DD /* CMPDataStorageProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPDataStorageProtocol.h; sourceTree = "<group>"; };
+		92214CC520921F96009049DD /* CMPDataStorageUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPDataStorageUserDefaults.m; sourceTree = "<group>"; };
+		92214CC720921F96009049DD /* CMPConsentToolUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolUtil.h; sourceTree = "<group>"; };
+		92214CC820921F96009049DD /* CMPTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPTypes.h; sourceTree = "<group>"; };
+		92214CC920921F96009049DD /* CMPConsentToolAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolAPI.m; sourceTree = "<group>"; };
+		92214CCA20921F96009049DD /* CMPConsentToolUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolUtil.m; sourceTree = "<group>"; };
+		92214CCB20921F96009049DD /* CMPConsentToolAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolAPI.h; sourceTree = "<group>"; };
+		92214CCD20921F96009049DD /* CMPConsentToolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPConsentToolViewController.h; sourceTree = "<group>"; };
+		92214CCE20921F96009049DD /* CMPActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPActivityIndicatorView.h; sourceTree = "<group>"; };
+		92214CCF20921F96009049DD /* CMPConsentToolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPConsentToolViewController.m; sourceTree = "<group>"; };
+		92214CD020921F96009049DD /* CMPActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPActivityIndicatorView.m; sourceTree = "<group>"; };
 		D1B2F06C2075FC4700EB06AE /* CMPConsentToolDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CMPConsentToolDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1B2F06F2075FC4700EB06AE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D1B2F0702075FC4700EB06AE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -65,20 +73,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9223A608207FC83D0035F7C1 /* CMPConsentClasses */ = {
+		92214CBD20921F96009049DD /* CMPConsentTool */ = {
 			isa = PBXGroup;
 			children = (
-				9223A60C207FC83D0035F7C1 /* CMPTypes.h */,
-				9223A609207FC83D0035F7C1 /* CMPConsentToolViewController.h */,
-				9223A60F207FC83D0035F7C1 /* CMPConsentToolViewController.m */,
-				9223A60A207FC83D0035F7C1 /* CMPConsentToolUtil.h */,
-				9223A60E207FC83D0035F7C1 /* CMPConsentToolUtil.m */,
-				9223A611207FC83D0035F7C1 /* CMPConsentToolAPI.h */,
-				9223A60D207FC83D0035F7C1 /* CMPConsentToolAPI.m */,
-				9223A60B207FC83D0035F7C1 /* CMPActivityIndicatorView.h */,
-				9223A610207FC83D0035F7C1 /* CMPActivityIndicatorView.m */,
+				92214CBE20921F96009049DD /* Parser */,
+				92214CC220921F96009049DD /* Storage */,
+				92214CC620921F96009049DD /* API */,
+				92214CCC20921F96009049DD /* Presentation */,
 			);
-			path = CMPConsentClasses;
+			path = CMPConsentTool;
+			sourceTree = SOURCE_ROOT;
+		};
+		92214CBE20921F96009049DD /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				92214CC020921F96009049DD /* CMPConsentConstant.h */,
+				92214CC120921F96009049DD /* CMPConsentParser.h */,
+				92214CBF20921F96009049DD /* CMPConsentParser.m */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		92214CC220921F96009049DD /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				92214CC420921F96009049DD /* CMPDataStorageProtocol.h */,
+				92214CC320921F96009049DD /* CMPDataStorageUserDefaults.h */,
+				92214CC520921F96009049DD /* CMPDataStorageUserDefaults.m */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		92214CC620921F96009049DD /* API */ = {
+			isa = PBXGroup;
+			children = (
+				92214CC820921F96009049DD /* CMPTypes.h */,
+				92214CC720921F96009049DD /* CMPConsentToolUtil.h */,
+				92214CCA20921F96009049DD /* CMPConsentToolUtil.m */,
+				92214CCB20921F96009049DD /* CMPConsentToolAPI.h */,
+				92214CC920921F96009049DD /* CMPConsentToolAPI.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		92214CCC20921F96009049DD /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				92214CCD20921F96009049DD /* CMPConsentToolViewController.h */,
+				92214CCF20921F96009049DD /* CMPConsentToolViewController.m */,
+				92214CCE20921F96009049DD /* CMPActivityIndicatorView.h */,
+				92214CD020921F96009049DD /* CMPActivityIndicatorView.m */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 		D1B2F0632075FC4700EB06AE = {
@@ -100,7 +146,7 @@
 		D1B2F06E2075FC4700EB06AE /* CMPConsentToolDemoApp */ = {
 			isa = PBXGroup;
 			children = (
-				9223A608207FC83D0035F7C1 /* CMPConsentClasses */,
+				92214CBD20921F96009049DD /* CMPConsentTool */,
 				D1B2F06F2075FC4700EB06AE /* AppDelegate.h */,
 				D1B2F0702075FC4700EB06AE /* AppDelegate.m */,
 				D1B2F0722075FC4700EB06AE /* ViewController.h */,
@@ -186,11 +232,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9223A614207FC83D0035F7C1 /* CMPConsentToolViewController.m in Sources */,
-				9223A613207FC83D0035F7C1 /* CMPConsentToolUtil.m in Sources */,
-				9223A612207FC83D0035F7C1 /* CMPConsentToolAPI.m in Sources */,
+				92214CD520921F96009049DD /* CMPConsentToolViewController.m in Sources */,
+				92214CD620921F96009049DD /* CMPActivityIndicatorView.m in Sources */,
+				92214CD320921F96009049DD /* CMPConsentToolAPI.m in Sources */,
+				92214CD120921F96009049DD /* CMPConsentParser.m in Sources */,
 				D1B2F0742075FC4700EB06AE /* ViewController.m in Sources */,
-				9223A615207FC83D0035F7C1 /* CMPActivityIndicatorView.m in Sources */,
+				92214CD420921F96009049DD /* CMPConsentToolUtil.m in Sources */,
+				92214CD220921F96009049DD /* CMPDataStorageUserDefaults.m in Sources */,
 				D1B2F07F2075FC4700EB06AE /* main.m in Sources */,
 				D1B2F0712075FC4700EB06AE /* AppDelegate.m in Sources */,
 			);
@@ -327,13 +375,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M2JQNLGGK3;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = CMPConsentToolDemoApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smaato.cmpapi.CMPConsentToolDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -346,13 +393,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = M2JQNLGGK3;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = CMPConsentToolDemoApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.smaato.cmpapi.CMPConsentToolDemoApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

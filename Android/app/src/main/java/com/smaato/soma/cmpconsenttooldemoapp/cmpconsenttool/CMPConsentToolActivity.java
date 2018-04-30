@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.callbacks.OnCloseCallback;
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.model.CMPSettings;
+import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.model.ConsentStringDecoder;
+import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.model.SubjectToGdpr;
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.storage.CMPStorage;
 
 public class CMPConsentToolActivity extends AppCompatActivity {
@@ -27,7 +29,8 @@ public class CMPConsentToolActivity extends AppCompatActivity {
     private CMPSettings cmpSettings;
 
     /**
-     * used to start the Activity where the consentToolUrl is loaded into WebView
+     * Used to start the Activity where the consentToolUrl is loaded into WebView
+     *
      * @param cmpSettings setup the needed data to initialize consent tool api.
      *                    In case no prior consent can be found, it executes the
      *                    procedure of getting consent from the user, which means
@@ -48,12 +51,20 @@ public class CMPConsentToolActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         cmpSettings = getCMPSettingsExtra();
 
-        if (cmpSettings == null || TextUtils.isEmpty(cmpSettings.getConsentToolUrl())) {
+        if (cmpSettings == null) {
+            CMPStorage.setSubjectToGdpr(this, SubjectToGdpr.CMPGDPRUnknown);
+            clearConsentStringPurposesAndVendors();
             finish();
             return;
         }
 
-        CMPStorage.setSubjectToGdpr(this, cmpSettings.getSubjectToGdpr().getValue());
+        CMPStorage.setSubjectToGdpr(this, cmpSettings.getSubjectToGdpr());
+
+        if (TextUtils.isEmpty(cmpSettings.getConsentToolUrl())) {
+            clearConsentStringPurposesAndVendors();
+            finish();
+            return;
+        }
 
         createLayout();
 
@@ -105,6 +116,12 @@ public class CMPConsentToolActivity extends AppCompatActivity {
         webView.setWebViewClient(gdprWebViewClient);
     }
 
+    private void clearConsentStringPurposesAndVendors() {
+        CMPStorage.setConsentString(this, null);
+        CMPStorage.setVendorsString(this, null);
+        CMPStorage.setPurposesString(this, null);
+    }
+
     private class GDPRWebViewClient extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -120,7 +137,7 @@ public class CMPConsentToolActivity extends AppCompatActivity {
         }
 
         private void handleWebViewInteraction(String url) {
-            storeConsentString(url);
+            handleReceivedConsentString(url);
 
             if (onCloseCallback != null) {
                 onCloseCallback.onWebViewClosed();
@@ -130,7 +147,7 @@ public class CMPConsentToolActivity extends AppCompatActivity {
             finish();
         }
 
-        private void storeConsentString(String url) {
+        private void handleReceivedConsentString(String url) {
             String[] values = new String[0];
 
             if (url != null) {
@@ -138,12 +155,11 @@ public class CMPConsentToolActivity extends AppCompatActivity {
             }
 
             if (values.length > 1) {
-                String[] consentString = values[1].split("/");
-
-                CMPStorage.setConsentString(CMPConsentToolActivity.this, consentString[0]);
-                if(consentString.length > 1) {
-                    CMPStorage.setVendorsString(CMPConsentToolActivity.this, consentString[1]);
-                }
+                CMPStorage.setConsentString(CMPConsentToolActivity.this, values[1]);
+                ConsentStringDecoder consentStringDecoder = new ConsentStringDecoder(CMPConsentToolActivity.this);
+                consentStringDecoder.processConsentString(values[1]);
+            } else {
+                clearConsentStringPurposesAndVendors();
             }
         }
     }

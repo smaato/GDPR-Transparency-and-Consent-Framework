@@ -1,98 +1,145 @@
 package com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.storage;
 
-import android.content.Context;
-import android.preference.PreferenceManager;
-import android.text.TextUtils;
-
-import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.model.CMPComponent;
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.model.SubjectToGdpr;
 
-import org.json.JSONObject;
-
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import android.content.Context;
+import android.preference.PreferenceManager;
 
 /**
- * Used to retrieve from SharedPreferences the consentData, subjectToGdpr and also CMPComponent
+ * Used to retrieve and store the consentData, subjectToGdpr, vendors and purposes in the SharedPreferences
  */
 public class CMPStorage {
+
     private static final String CONSENT_STRING = "IABConsent_ConsentString";
     private static final String SUBJECT_TO_GDPR = "IABConsent_SubjectToGDPR";
-    private static final String VENDOR_LIST_JSON = "vendors";
+    private static final String CMP_PRESENT = "IABConsent_CMPPresent";
+    private static final String VENDORS = "IABConsent_ParsedVendorConsents";
+    private static final String PURPOSES = "IABConsent_ParsedPurposeConsents";
+    private static final String EMPTY_DEFAULT_STRING = "";
 
-    private static String consentString;
-    private static int subjectToGdpr = 2;
-    private static String vendorListJson;
-
-
+    /**
+     * Returns the websafe base64-encoded consent String stored in the SharedPreferences
+     *
+     * @param context Context used to access the SharedPreferences
+     * @return the stored websafe base64-encoded consent String
+     */
     public static String getConsentString(Context context) {
-        if (TextUtils.isEmpty(consentString)) {
-            consentString = PreferenceManager.getDefaultSharedPreferences(context).getString(CONSENT_STRING, null);
-        }
-
-        return consentString;
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(CONSENT_STRING, EMPTY_DEFAULT_STRING);
     }
 
+    /**
+     * Stores the passed websafe base64-encoded consent String in the SharedPreferences
+     *
+     * @param context       Context used to access the SharedPreferences
+     * @param consentString the websafe base64-encoded consent String to be stored
+     */
     public static void setConsentString(Context context, String consentString) {
-        CMPStorage.consentString = consentString;
         PreferenceManager.getDefaultSharedPreferences(context).edit().putString(CONSENT_STRING, consentString).apply();
     }
 
+    /**
+     * Returns the {@link SubjectToGdpr} stored in the SharedPreferences
+     *
+     * @param context Context used to access the SharedPreferences
+     * @return the stored {@link SubjectToGdpr}
+     */
     public static SubjectToGdpr getSubjectToGdpr(Context context) {
-        if (PreferenceManager.getDefaultSharedPreferences(context).contains(SUBJECT_TO_GDPR)) {
-            subjectToGdpr = PreferenceManager.getDefaultSharedPreferences(context).getInt(SUBJECT_TO_GDPR, 2);
-        }
-
-        return SubjectToGdpr.getValueForInteger(subjectToGdpr);
+        String subjectToGdpr = PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(SUBJECT_TO_GDPR, SubjectToGdpr.CMPGDPRUnknown.getValue());
+        return SubjectToGdpr.getValueForString(subjectToGdpr);
     }
 
-    public static void setSubjectToGdpr(Context context, int subjectToGdpr) {
-        CMPStorage.subjectToGdpr = subjectToGdpr;
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putInt(SUBJECT_TO_GDPR, subjectToGdpr).apply();
+    /**
+     * Stores the passed {@link SubjectToGdpr} in the SharedPreferences
+     *
+     * @param context       Context used to access the SharedPreferences
+     * @param subjectToGdpr the {@link SubjectToGdpr} to be stored
+     */
+    public static void setSubjectToGdpr(Context context, SubjectToGdpr subjectToGdpr) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(SUBJECT_TO_GDPR, subjectToGdpr.getValue()).apply();
     }
 
-    public static Map<String, Boolean> getVendorsMap(Context context) {
-        String vendorsString = getVendorsString(context);
-        return parseVendorsString(vendorsString);
+    /**
+     * Returns the CMP present boolean stored in the SharedPreferences
+     *
+     * @return {@code true} if a CMP implementing the iAB specification is present in the application, otherwise {@code false};
+     */
+    public static boolean getCmpPresentValue(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(CMP_PRESENT, false);
     }
 
+    /**
+     * Stores the CMP present boolean in SharedPreferences
+     *
+     * @param cmpPresent indicates whether a CMP implementing the iAB specification is present in the application
+     */
+    public static void setCmpPresentValue(Context context, boolean cmpPresent) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putBoolean(CMP_PRESENT, cmpPresent).apply();
+    }
+
+    /**
+     * Returns the vendors binary String stored in the SharedPreferences
+     *
+     * @param context Context used to access the SharedPreferences
+     * @return the stored vendors binary String
+     */
     public static String getVendorsString(Context context) {
-        if (PreferenceManager.getDefaultSharedPreferences(context).contains(VENDOR_LIST_JSON)) {
-            vendorListJson = PreferenceManager.getDefaultSharedPreferences(context).getString(VENDOR_LIST_JSON, vendorListJson);
-        }
-
-        return vendorListJson;
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(VENDORS, EMPTY_DEFAULT_STRING);
     }
 
-    public static void setVendorsString(Context context, String vendorListJson) {
-        CMPStorage.vendorListJson = vendorListJson;
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(VENDOR_LIST_JSON, vendorListJson).apply();
+    /**
+     * Stores the passed vendors binary String in SharedPreferences
+     *
+     * @param context Context used to access the SharedPreferences
+     * @param vendors binary String to be stored
+     */
+    public static void setVendorsString(Context context, String vendors) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(VENDORS, vendors).apply();
     }
 
-    public static String getConsentData(Context context) {
-        return CMPStorage.getConsentString(context);
+    /**
+     * Returns the purposes binary String stored in the SharedPreferences
+     *
+     * @param context Context used to access the SharedPreferences
+     * @return the stored purposes binary String
+     */
+    public static String getPurposesString(Context context) {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(PURPOSES, EMPTY_DEFAULT_STRING);
     }
 
-    public static CMPComponent getCMPComponent(Context context) {
-        return new CMPComponent(CMPStorage.getSubjectToGdpr(context), CMPStorage.getConsentString(context));
+    /**
+     * Stores the passed purposes binary String in SharedPreferences
+     *
+     * @param context  Context used to access the SharedPreferences
+     * @param purposes binary String to be stored
+     */
+    public static void setPurposesString(Context context, String purposes) {
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(PURPOSES, purposes).apply();
     }
 
-    private static Map<String, Boolean> parseVendorsString(String vendorsJsonString) {
-        Map<String, Boolean> vendors = new LinkedHashMap<>();
+    /**
+     * Returns whether the consent was given for the passed purpose id
+     *
+     * @param context   Context used to access the SharedPreferences
+     * @param purposeId the purpose id to check the consent for
+     * @return true if consent was given, false otherwise
+     */
+    public static boolean isPurposeConsentGivenForPurposeId(Context context, int purposeId) {
+        String purposes = getPurposesString(context);
 
-        try {
-            JSONObject jsonObject = new JSONObject(vendorsJsonString);
-            Iterator<String> keys = jsonObject.keys();
+        return purposes.length() >= purposeId && purposes.charAt(purposeId - 1) == '1';
+    }
 
-            while (keys.hasNext()) {
-                String key = keys.next();
-                vendors.put(key, jsonObject.getBoolean(key));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    /**
+     * Returns whether the consent was given for the passed vendor id
+     *
+     * @param context  Context used to access the SharedPreferences
+     * @param vendorId the vendor id to check the consent for
+     * @return true if consent was given, false otherwise
+     */
+    public static boolean isVendorConsentGivenForVendorId(Context context, int vendorId) {
+        String vendors = getVendorsString(context);
 
-        return vendors;
+        return vendors.length() >= vendorId && vendors.charAt(vendorId - 1) == '1';
     }
 }

@@ -9,34 +9,51 @@ import android.widget.Toast;
 
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.CMPConsentToolActivity;
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.callbacks.OnCloseCallback;
-import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.model.CMPComponent;
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.model.CMPSettings;
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.model.SubjectToGdpr;
 import com.smaato.soma.cmpconsenttooldemoapp.cmpconsenttool.storage.CMPStorage;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView gdprInfoTextView;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Button gdprButton = findViewById(R.id.gdpr_button);
-        final TextView consentStringEditText = findViewById(R.id.consent_string_text_view);
-        consentStringEditText.setText(CMPStorage.getConsentString(MainActivity.this));
+        gdprInfoTextView = findViewById(R.id.gdpr_info_text_view);
 
         gdprButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                CMPStorage.setCmpPresentValue(MainActivity.this, true);
                 CMPSettings cmpSettings = new CMPSettings(SubjectToGdpr.CMPGDPREnabled, "https://demofiles.smaato.com/cmp/index.html", null);
+
                 CMPConsentToolActivity.openCmpConsentToolView(cmpSettings, MainActivity.this, new OnCloseCallback() {
                     @Override
                     public void onWebViewClosed() {
                         Toast.makeText(MainActivity.this, "Got consent", Toast.LENGTH_LONG).show();
-                        consentStringEditText.setText(CMPStorage.getConsentData(MainActivity.this));
+
+                        gdprInfoTextView.setText(getGdprInfo());
                     }
                 });
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        gdprInfoTextView.setText(getGdprInfo());
+    }
+
+    private String getGdprInfo() {
+        return String.format("consentString: %s\nvendors: %s\npurposes: %s\nsubjectToGDPR: %s",
+                CMPStorage.getConsentString(this),
+                CMPStorage.getVendorsString(this),
+                CMPStorage.getPurposesString(this),
+                CMPStorage.getSubjectToGdpr(this));
     }
 }

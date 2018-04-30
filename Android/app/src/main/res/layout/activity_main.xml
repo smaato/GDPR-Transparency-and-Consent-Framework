@@ -15,15 +15,9 @@
         android:textAllCaps="false" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/consent_string_label"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/consent_string_text_view"
+        android:id="@+id/gdpr_info_text_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-            android:padding="10dp"/>
+        android:padding="10dp" />
 
 </LinearLayout>
