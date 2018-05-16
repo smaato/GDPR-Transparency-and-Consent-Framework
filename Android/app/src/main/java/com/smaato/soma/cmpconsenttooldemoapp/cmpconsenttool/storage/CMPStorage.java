@@ -56,7 +56,13 @@ public class CMPStorage {
      * @param subjectToGdpr the {@link SubjectToGdpr} to be stored
      */
     public static void setSubjectToGdpr(Context context, SubjectToGdpr subjectToGdpr) {
-        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(SUBJECT_TO_GDPR, subjectToGdpr.getValue()).apply();
+        String subjectToGdprValue = null;
+
+        if (subjectToGdpr == SubjectToGdpr.CMPGDPRDisabled || subjectToGdpr == SubjectToGdpr.CMPGDPREnabled) {
+            subjectToGdprValue = subjectToGdpr.getValue();
+        }
+
+        PreferenceManager.getDefaultSharedPreferences(context).edit().putString(SUBJECT_TO_GDPR, subjectToGdprValue).apply();
     }
 
     /**
